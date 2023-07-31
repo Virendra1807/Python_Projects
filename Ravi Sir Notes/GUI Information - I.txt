@@ -1,0 +1,141 @@
+
+* The tkinter library contains some minimum required 
+component classes to prepare GUI.
+
+* In Java ---> Components
+* In .net ---> windows tookit
+* In Android and Python ---> widgets
+
+* All these are library classes. And their objects prepares 
+one GUI component.
+
+* for example,
+	If we want one button, then we have to declare 
+	one object of class Button.
+	If we want one textbox, then we have to declare 
+	one object of class Entry.
+
+* Here we have to use specific constructor of widget classes.
+
+===========================
+
+step 1: import tkinter library
+
+step 2: Prepare base i.e. object of class "tkinter.Tk"
+	This base is like output window, that will appear 
+	when we run this program.
+
+step 3: Start declaring objects of required widget classes.
+	and use proper parameter/attribute for it's 
+	constructor.
+
+step 4: Add every widget object into base by using 
+	pack() or place() or grid()
+
+step 5: Start the output of base by using mainloop() method.
+
+
+For example:
+-------------
+
+from tkinter import *
+
+base = Tk()
+
+b1 = Button(base)
+b1.pack()
+
+base.mainloop()
+
+=============================
+
+Example 2:
+-----------
+
+from tkinter import *
+
+base = Tk()
+base.geometry("300x300")
+base.title("Demonstrating First GUI")
+
+btn1 = Button(base, text="Submit", fg="blue", bg="yellow")
+btn1.pack()
+
+lb1 = Label(base, text="Enter User ID")
+lb1.pack()
+
+txt1 = Entry(base)
+txt1.pack()
+
+base.mainloop()
+
+=========================================
+
+Example-3:
+-----------
+
+from tkinter import *
+
+ft = ("Arial Bold", 12)
+
+base = Tk()
+base.geometry("300x300")
+base.title("Demonstrating First GUI")
+
+btn1 = Button(base, text="Submit", fg="blue", bg="yellow", font=ft)
+btn1.pack()
+
+lb1 = Label(base, text="Enter User ID", font=ft)
+lb1.pack()
+
+txt1 = Entry(base, font=ft)
+txt1.pack()
+
+txt2 = Entry(base, show="*", font=ft)
+txt2.pack()
+
+base.mainloop()
+
+=========================================
+
+To align the components, we have 3 methods.
+
+pack():
+This method directly adds component object into center 
+of screen. Mainly prefer this to directly add panels.
+
+place():
+This method has 2 parameters.
+	x =
+	y =
+We specify co-ordinate of X axis and Y axis.
+
+For example:
+-------------
+
+from tkinter import *
+
+ft = ("Arial Bold", 12)
+
+base = Tk()
+base.configure(bg="cyan")
+base.geometry("500x500")
+base.title("Demonstrating First GUI")
+
+btn1 = Button(base, text="Submit", fg="blue", bg="yellow", font=ft)
+btn1.place(x=100, y=125)
+
+lb1 = Label(base, text="Enter User ID", font=ft)
+
+
+txt1 = Entry(base, font=ft)
+txt1.place(x=100, y=175)
+
+txt2 = Entry(base, show="*", font=ft)
+
+
+
+base.mainloop()
+
+==================================================
+

@@ -1,0 +1,250 @@
+
+# program to demonstrate static data member.
+
+class Test:
+    def accept_info(self):
+        print("Enter 3 values")
+        self.x = input()
+        self.y = input()
+        Test.z = input()  <--- becomes static data member
+
+    def show_info(self):
+        print(self.x)
+        print(self.y)
+        print(Test.z)  <--- is static data member
+
+t1 = Test()
+t2 = Test()
+print("For first object")
+t1.accept_info()
+print("Showing first object")
+t1.show_info()
+
+print("For second object")
+t2.accept_info()
+print("Showing second object")
+t2.show_info()
+
+print("again showing first object")
+t1.show_info()
+
+=====================================================
+
+# program to demonstrate single inheritance.
+
+class A:
+    def method1(self):
+        print("method1 of class A")
+
+class B(A):
+    def method2(self):
+        print("method2 of class B")
+
+b1 = B()
+b1.method1()
+b1.method2()
+
+====================================================
+
+# program to demonstrate method overriding.
+
+class A:
+    def method1(self):
+        print("method1 of class A")
+
+class B(A):
+    def method1(self):
+        print("method1 of class B")
+
+b1 = B()
+A.method1(b1)  
+	# This will don't pass ID of invoking object
+	# hence, we have to manually pass invoking object 
+	# to "self". So that it works for object 'b1'
+
+b1.method1()
+	# this will by-default pass ID of invoking object 
+	# 'b1'. And method1() works for object 'b1'
+
+===========================================
+
+# Program to demonstrate multilevel inheritance.
+
+
+class A:
+    def method1(self):
+        print("method1 of class A")
+
+class B(A):
+    def method2(self):
+        print("method2 of class B")
+
+class C(B):
+    def method3(self):
+        print("method3 of class C")
+
+c1 = C()
+c1.method1()
+c1.method2()
+c1.method3()
+
+=====================================
+
+# Program to demonstrate multiple inheritance.
+
+class A:
+    def method1(self):
+        print("method1 of class A")
+
+class B:
+    def method2(self):
+        print("method2 of class B")
+
+class C:
+    def method3(self):
+        print("method3 of class C")
+
+class D(A,B,C):  <--- class 'D' inheritance class A,B and C
+    def method4(self):
+        print("method4 of class D")
+
+
+d1 = D()
+d1.method1()
+d1.method2()
+d1.method3()
+d1.method4()
+
+=============================================
+
+# Demonstrating ambiguity error in multiple inheritance.
+# No ambiguity error in python's multiple inheritance.
+# The order of inheritance will decide the priority.
+
+
+class A:
+    def method1(self):
+        print("method1 of class A")
+
+class B:
+    def method1(self):
+        print("method1 of class B")
+
+class C:
+    def method3(self):
+        print("method3 of class C")
+
+class D(A,B,C):  <--- order of inheritance is: A then B then C
+    def method4(self):
+        print("method4 of class D")
+
+
+d1 = D()
+d1.method1()
+	# both base classes A and B contains method1()
+	# priority goes according to order of inheritance.
+	# TF calls to method1() of class A
+
+B.method1(d1)
+	# this will call to method1() of class 'B'
+	# and make it work for object 'd1'.
+	# b'coz "self" gets initialized with ID of 'd1'
+
+===============================================
+
+# demonstrating exectution of constructors in inheritance.
+
+
+class A:
+    def __init__(self):
+        print("constructor of class A")
+
+class B(A):
+    def __init__(self):
+        print("constructor of class B")
+
+b1 = B()
+	# this will not execute constructors as per theory
+	# of C++ and Java.
+	# only constructor of derived class 'B' will execute.
+	# b'coz it feels like method-overriding.
+	# we have to manually make call to constructor of 
+	# base class 'A' for object 'b1'
+A.__init__(b1)
+	# this makes call to constructor of 'A' for 
+	# object 'b1'
+
+==========================================
+
+# Same above manual calling to constructor of base class
+can also be done from constructor of derived class.
+
+
+class A:
+    def __init__(self):
+        print("constructor of class A")
+
+class B(A):
+    def __init__(self):
+        A.__init__(self) 
+		# manually calling constructor of base class
+		# for same invoking object, that called to 
+		# constructor of derived class.
+        print("constructor of class B")
+
+
+b1 = B()
+
+
+# here we can manually call to constructor of base class 
+from constructor of derived class. But not necessary to 
+call it as first statement of constructor of derived class.
+
+===========================================
+
+*** If any dynamic and mutable entity (list, set, dict, 
+or object of any user define class) is declare as direct 
+data-member (in open area of class), then these entities
+will not create separate instances in each object.
+** It will behave like a static data member (which reamains
+common between all objects of that class)
+** Therefore prefer such dynamic and mutable entities 
+to declare in member function by using 'self'
+
+For example:
+1) run following program:
+
+class Test:
+    ls = []  <-- behaves as static entity of this class
+    def __init__(self,x):
+        self.ls.append(x)
+        print(self.ls)
+
+s1 = student(10)
+s2 = student(20)
+s3 = student(30)
+
+
+2) now run following program:
+
+class Test:
+    def __init__(self,x):
+	self.ls = []   <--- behaves as non-static (instance)
+			entity of this class.
+        self.ls.append(x)
+        print(self.ls)
+
+s1 = student(10)
+s2 = student(20)
+s3 = student(30)
+
+=====================================
+
+* This does not mean that every data member (declared in 
+open area of class) behaves static entity.
+
+* only dynamic and mutable entities declared as data member 
+(declared in open area of class) behaves as static entity.
+
+===================================================
+

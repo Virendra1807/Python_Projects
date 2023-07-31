@@ -1,0 +1,326 @@
+
+
+def check(*a):		<--- variable length arguments
+	body here
+
+
+def check(**a):		<--- variable length keyword arguments
+	body here
+
+
+** In case of variable length arguments, the datatype is 
+considered as 'tuple'.
+** In case of variable length keyword arguments, the
+ datatype is considered as 'dict'
+
+For example:
+-------------
+def check(**a):
+    print("Received :", a)
+    print("Type is :", type(a))
+
+check(eid=123456, ename="Amit", edept="R&D")
+check(bnum=10223, btitle="Let Us C", bauth="YK", bpub="BPB")
+check(accnum=125364899574, actype="Savings")
+
+Output will be:
+----------------
+Received : {'edept': 'R&D', 'eid': 123456, 'ename': 'Amit'}
+Type is : <class 'dict'>
+Received : {'bpub': 'BPB', 'bnum': 10223, 'bauth': 'YK', 'btitle': 'Let Us C'}
+Type is : <class 'dict'>
+Received : {'actype': 'Savings', 'accnum': 125364899574}
+Type is : <class 'dict'>
+
+====================================================
+====================================================
+
+**** dictionary ****
+--------------------
+* is set of {key:value} pair.
+* is dynamic and mutable data structure.
+* use {} to indicate dictionary.
+* every dictionary is object of class 'dict'
+* keys must be unique; whereas values can be duplicate
+* keys must be static entities; whereas values can be 
+anything.
+
+*** We can over-write any value by referring "key" as 
+index.
+*** And if specified key is not present in dictionary, 
+then it adds as new {key:value} pair. Means assignment 
+operator can also add new {key:value} pair.
+
+===================================================
+
+1) update():
+* The parameter of this function must be a dictionary.
+* This function concatinates {k:v} pairs of parameter 
+dictionary into invoking dictionary object.
+
+For example:
+-------------
+a = {"Akash":12345, "Vivek":67890}
+print("Initially a :", a)
+
+a.update({"Tushar":102030})  
+	# adds this new {k:v} pair in invoking 'a'
+print("Updated a :", a)
+
+Output will be:
+----------------
+Initially a : {'Vivek': 67890, 'Akash': 12345}
+Updated a : {'Vivek': 67890, 'Akash': 12345, 'Tushar': 102030}
+
+* We can also specify another dictionary object as parameter.
+
+For example:
+-------------
+b = {"Tushar":102030, "Vaibhav":405060}
+a = {"Akash":12345, "Vivek":67890}
+print("Initially a :", a)
+
+a.update(b)
+	# adds {k:v} pairs of 'b' into invoking 'a'
+print("Updated a :", a)
+
+Output will be:
+----------------
+Initially a : {'Vivek': 67890, 'Akash': 12345}
+Updated a : {'Vaibhav': 405060, 'Vivek': 67890, 'Akash': 12345, 'Tushar': 102030}
+
+
+* If duplicate key is provieded, then it over-writes 
+this new k:v pair with old k:v pair.
+
+===============================================
+
+2) keys():
+* This function obtains and returns a list of only keys 
+from invoking dictionary object.
+
+For example:
+-------------
+a = {"Akash":12345, "Vivek":67890, "Tushar":102030, "Vaibhav":405060}
+print("Initially a :", a)
+
+b = tuple(a.keys())
+print(b)
+
+Output will be:
+----------------
+Initially a : {'Vivek': 67890, 'Vaibhav': 405060, 'Akash': 12345, 'Tushar': 102030}
+('Vivek', 'Vaibhav', 'Akash', 'Tushar')
+
+=================================================
+
+3) values():
+* This function obtains and returns only values of 
+invoking dictionary object. 
+
+For example:
+-------------
+a = {"Akash":12345, "Vivek":67890, "Tushar":102030, "Vaibhav":405060}
+print("Initially a :", a)
+
+b = tuple(a.values())
+print(b)
+
+Output will be:
+----------------
+Initially a : {'Tushar': 102030, 'Vaibhav': 405060, 'Akash': 12345, 'Vivek': 67890}
+(102030, 405060, 12345, 67890)
+
+================================================
+
+4) items():
+* This function obtains and returns {k:v} pairs as 
+tuple elements.
+
+For example:
+-------------
+a = {"Akash":12345, "Vivek":67890, "Tushar":102030, "Vaibhav":405060}
+print("Initially a :", a)
+
+b = list(a.items())
+print(b)
+
+Ouput will be:
+---------------
+Initially a : {'Vivek': 67890, 'Tushar': 102030, 'Vaibhav': 405060, 'Akash': 12345}
+[('Vivek', 67890), ('Tushar', 102030), ('Vaibhav', 405060), ('Akash', 12345)]
+
+============================================
+
+5) copy():
+* This function returns a new copy of invoking dictionary 
+object.
+* ID of both objects will be different.
+
+For example:
+-------------
+a = {"Akash":12345, "Vivek":67890, "Tushar":102030, "Vaibhav":405060}
+print("Initially a :", a)
+
+b = a.copy()
+print("Copy b :", b)
+print(id(a))
+print(id(b))
+
+Output will be:
+----------------
+Initially a : {'Vivek': 67890, 'Akash': 12345, 'Tushar': 102030, 'Vaibhav': 405060}
+Copy b : {'Vivek': 67890, 'Akash': 12345, 'Tushar': 102030, 'Vaibhav': 405060}
+40745800
+40746248
+
+===================================================
+
+6) clear():
+* This function clears all {k:v} pairs from invoking 
+dictionary object. 
+
+For example:
+-------------
+a = {"Akash":12345, "Vivek":67890, "Tushar":102030, "Vaibhav":405060}
+print("Initially a :", a)
+
+a.clear()
+print("Updated a :", a)
+
+Output will be:
+----------------
+Initially a : {'Tushar': 102030, 'Vaibhav': 405060, 'Akash': 12345, 'Vivek': 67890}
+Updated a : {}
+
+===========================================
+
+7) fromkeys():
+* This function requires a sequence as parameter.
+* This function generates and returns new dictionary 
+object whose keys are formed from specified sequence 
+object. 
+* And their default values are "None"
+* Invoking object will not be affected.
+
+For example:
+-------------
+ls = ["empid", "empname", "empcity"]
+tup = ("bnum", "btitle", "bauthor", "bpublication")
+ls2 = range(1,11)
+
+a = {}.fromkeys(ls, "Not Available")
+b = {}.fromkeys(tup, "NA")
+c = {}.fromkeys(ls2, [])
+
+print(a)
+print(b)
+print(c)
+
+Output will be:
+----------------
+{'empname': 'Not Available', 'empcity': 'Not Available', 'empid': 'Not Available'}
+{'bnum': 'NA', 'bauthor': 'NA', 'btitle': 'NA', 'bpublication': 'NA'}
+{1: [], 2: [], 3: [], 4: [], 5: [], 6: [], 7: [], 8: [], 9: [], 10: []}
+
+* We can also change the default value by specifying 
+default value as second parameter.
+
+=================================================
+
+8) get():
+* This function requires a "key" as parameter.
+* This function obtains and returns value of specified 
+key from invoking dictionary object. 
+
+For example:
+-------------
+a = {"Akash":12345, "Vivek":67890, "Tushar":102030, "Vaibhav":405060}
+print("Initially a :", a)
+
+b = a.get("Vivek") <-- is similar to -->  b = a["Vivek"]
+print(b)
+
+Output will be:
+----------------
+Initially a : {'Tushar': 102030, 'Vivek': 67890, 'Akash': 12345, 'Vaibhav': 405060}
+67890
+
+* If specified key is not present in invoking dictionary 
+object, then this function returns None.
+
+==================================================
+
+9) pop():
+* This function requires "key" as parameter.
+* This function pops-out / removes specified key:value 
+pair from invoking dictionary object (by referring 
+specified key).
+
+For example:
+-------------
+a = {"Akash":12345, "Vivek":67890, "Tushar":102030, "Vaibhav":405060}
+print("Initially a :", a)
+
+a.pop("Vivek")
+print("Updated a :", a)
+
+Output will be:
+----------------
+Initially a : {'Tushar': 102030, 'Vivek': 67890, 'Vaibhav': 405060, 'Akash': 12345}
+Updated a : {'Tushar': 102030, 'Vaibhav': 405060, 'Akash': 12345}
+
+* If specified "key" is not present in invoking 
+dictionary object, then this function shows KeyError.
+
+For example:
+--------------
+a.pop("abcd")  <--- "abcd" is not present as key in 'a'
+print("Updated a :", a)
+
+Error will be:
+---------------
+KeyError: 'abcd'
+
+=================================================
+
+10) popitem():
+* This function pops-out/removes any random {k:v} pair 
+from invoking dictionary object. 
+* This function returns that {k:v} pair.
+
+For example:
+-------------
+a = {"Akash":12345, "Vivek":67890, "Tushar":102030, "Vaibhav":405060}
+print("Initially a :", a)
+
+b = a.popitem()  #<--- randomly pops any {k:v} pair
+print("Updated a :", a)
+print("Popped pair : ", b)
+
+Ouput will be:
+---------------
+Initially a : {'Vaibhav': 405060, 'Tushar': 102030, 'Vivek': 67890, 'Akash': 12345}
+Updated a : {'Tushar': 102030, 'Vivek': 67890, 'Akash': 12345}
+Popped pair :  ('Vaibhav', 405060)
+
+===================================================
+11) setdefault():
+* This function adds specified key value pair as new 
+element in invoking dictionary object.
+
+For example:
+-------------
+a = {"Akash":12345, "Vivek":67890, "Tushar":102030, "Vaibhav":405060}
+print("Initially a :", a)
+
+a.setdefault("Amey", 556677)
+print("Updated a :", a)
+
+Output will be:
+----------------
+Initially a : {'Akash': 12345, 'Tushar': 102030, 'Vivek': 67890, 'Vaibhav': 405060}
+Updated a : {'Akash': 12345, 'Tushar': 102030, 'Amey': 556677, 'Vivek': 67890, 'Vaibhav': 405060}
+
+===================================================
+

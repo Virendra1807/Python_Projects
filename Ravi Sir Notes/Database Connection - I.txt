@@ -1,0 +1,58 @@
+
+* In any databases, there are 3 main steps:
+	step 1: connect to DB
+	step 2: fire the query
+	step 3: close database connection
+
+* In different languages, the numbers of statements varies.
+But above 3 steps are mandatory.
+	For example:
+	In Java, we need 5 statements
+	In C#, VB.net we need 4 statements
+
+* Here in Python, we have 3 statements to perform DB 
+operations.
+
+* In Python, we can connect with any database, but 
+SQLite3 is Python's local database (in-house database). 
+For it we don't require any additional drivers to 
+download.
+
+* We have package "sqlite3" to be imported.
+
+* In Python,
+	step 1: connect to Database by using connect().
+		This function returns an object of 
+		class Connection. This object can be used 
+		to perform further database operations.
+		(similar to 'fobj' that we used in Files)
+	step 2: Directly fire query, by using execute() 
+		method.
+	step 3: commit the query by using commit() 
+	step 4: close the connection.
+
+* In Java, auto-commit option is by-default true. Therefore 
+a query directly gets affected. No need to apply commit.
+
+* In Python, auto-commit option is by-default false. 
+Therefore it is mandatory to commit the query by using 
+commit().
+
+For example:
+-------------
+import sqlite3
+
+nm = input("Enter employee Name : ")
+post = input("Enter Post : ")
+dep = input("Enter Department : ")
+sal = input("Enter Salary : ")
+
+query = "insert into emp_info values ('" + nm + "', '" + post + "', '" + dep + "', '" + sal + "')"
+con = sqlite3.connect("student_db.db")
+con.execute(query)
+con.commit()
+con.close()
+print("Data Saved...")
+
+====================================
+

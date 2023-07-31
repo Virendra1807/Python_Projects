@@ -1,0 +1,5 @@
+101,rice,110
+104,tandoor,12
+103,paneer,10
+105,biryani,180
+102,daal,90

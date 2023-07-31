@@ -1,0 +1,98 @@
+
+all_stud = []
+
+class Student:
+    def __init__(self):
+        self.enr = input("Enter Enrollment Number : ")
+        self.name = input("Enter Student Name : ")
+        self.sfees = input("Enter Fees Paid : ")
+        self.mob = input("Enter Mobile Number : ")
+
+    def get_enr(self):
+        return self.enr
+
+    def add_fees(self, fees_to_add):
+        self.sfees = str(int(self.sfees) + int(fees_to_add))
+        print("Fees Updated.., Updated Fees :", self.sfees)
+
+    def show_stud_info(self):
+        print("Enrollment Number :", self.enr)
+        print("Student Name :", self.name)
+        print("Fees Paid :", self.sfees)
+        print("Mobile Number :", self.mob)
+
+def add_new_stud():
+    s = Student()
+    all_stud.append(s)
+    print("Student Added...")
+
+def delete_stud():
+    stud_found = False
+    e = input("Enter Enrollment Number to Delete Information : ")
+    i = 0
+    while i<len(all_stud):
+        a = all_stud[i].get_enr()
+        if a == e:
+            stud_found = True
+            break
+        i = i + 1
+    if stud_found == True:
+        all_stud.pop(i)
+        print("Student Information Deleted...")
+    elif stud_found == False:
+        print("Invalid Enrollment Number...")
+
+def update_fees():
+    stud_found = False
+    e = input("Enter Enrollment Number to Update Fees : ")
+    i = 0
+    while i < len(all_stud):
+        a = all_stud[i].get_enr()
+        if a == e:
+            # means this index number contains that
+            # enrollment number to update fees
+            stud_found = True
+            break
+        i = i + 1
+    if stud_found == True:
+        fees_to_ad = input("Enter paid fees to add : ")
+        all_stud[i].add_fees(fees_to_ad)
+    elif stud_found == False:
+        print("Invalid Enrollment Number...")
+
+def show_stud_info():
+    stud_found = False
+    e = input("Enter Enrollment number to Fetch Information : ")
+    i = 0
+    while i<len(all_stud):
+        a = all_stud[i].get_enr()
+        if a==e:
+            stud_found = True
+            break
+        i = i + 1
+    if stud_found == True:
+        all_stud[i].show_stud_info()
+    elif stud_found == False:
+        print("Invalid Enrollment Number")
+
+def show_all_stud_info():
+    for sobj in all_stud:
+        sobj.show_stud_info()
+
+while True:
+    print("Select an option")
+    print("1 - Add New Student")
+    print("2 - Delete Student")
+    print("3 - Update Fees")
+    print("4 - Show Student Info")
+    print("5 - Show All Students Info")
+    print("6 - Exit")
+    print("Provide your choice : ")
+    ch = int(input())
+
+    if ch==1: add_new_stud()
+    elif ch==2: delete_stud()
+    elif ch==3: update_fees()
+    elif ch==4: show_stud_info()
+    elif ch==5: show_all_stud_info()
+    elif ch==6: break

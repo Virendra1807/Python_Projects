@@ -1,0 +1,249 @@
+
+* To set any attribute/property of component object, 
+we have two options:
+	1) through constructor of that class
+	2) through configure() method
+
+For example:
+--------------
+rb1 = Radiobutton(base)
+rb1.configure(font=ft, text="Male")
+rb1.pack()
+
+OR
+
+rb1 = Radiobutton(base, font=ft, text="Male")
+rb1.pack()
+
+OR
+
+rb1 = Radiobutton(base, font=ft)
+rb1.configure( text="Male")
+
+==============================================
+
+* If attributes/properties are already known, then 
+assign them through constructor.
+* If attributes/properties are to be assigned during 
+runtime (through events) then prefer configure() method.
+
+===============================================
+
+Example-1:
+-----------
+from tkinter import *
+
+base = Tk()
+base.geometry("300x300")
+base.title("First GUI Application")
+ft = ("Arial Bold", 13)
+
+def eventmethod1():
+    a = v1.get()
+    if a==1: print("You are Male")
+    elif a==2: print("You are Female")
+    elif a==3: print("You don't want to specify")
+
+v1 = IntVar()
+rb1 = Radiobutton(base, font=ft, text="Male")
+rb1.configure(variable=v1, value=1)
+rb1.pack()
+
+rb2 = Radiobutton(base, font=ft, text="Female")
+rb2.configure(variable=v1, value=2)
+rb2.pack()
+
+rb3 = Radiobutton(base, font=ft, text="Not Specified")
+rb3.configure(variable=v1, value=3)
+rb3.pack()
+
+btn1 = Button(base, text="Check", font=ft, command=eventmethod1)
+btn1.pack()
+
+base.mainloop()
+
+=================================================
+
+* Remember that, textboes don't have "text=" attribute.
+* But instead, textboxes have insert() method to add 
+any text in it.
+
+For example:
+-------------
+txt1 = Entry(base, font=ft)
+txt1.insert(0, "Enter Password Here")
+txt1.pack()
+
+===================================================
+
+* To obtain/fetch any value from textboxes, we have 
+get() method. 
+* This function fetch any written data from invoking 
+textbox object and returns as string.
+
+For example:
+-------------
+from tkinter import *
+
+base = Tk()
+base.geometry("300x300")
+base.title("First GUI Application")
+ft = ("Arial Bold", 13)
+
+def eventmethod1():
+    a = int(txt1.get())
+    b = int(txt2.get())
+    c = a + b
+    txt3.delete(0, END)
+    txt3.insert(0, str(c))
+
+
+txt1 = Entry(base, font=ft)
+txt1.pack()
+
+txt2 = Entry(base, font=ft)
+txt2.pack()
+
+btn = Button(base, text="ADD", font=ft, command=eventmethod1)
+btn.pack()
+
+txt3 = Entry(base, font=ft)
+txt3.pack()
+
+base.mainloop()
+
+====================================
+
+Example-5:
+-----------
+from tkinter import *
+
+base = Tk()
+base.geometry("300x300")
+base.title("First GUI Application")
+ft = ("Arial Bold", 13)
+
+def eventmethod1():
+    a = int(txt1.get())
+    b = int(txt2.get())
+    c = a + b
+    txt3.delete(0, END)
+    txt3.insert(0, str(c))
+
+def eventmethod2():
+    a = int(txt1.get())
+    b = int(txt2.get())
+    c = a - b
+    txt3.delete(0, END)
+    txt3.insert(0, str(c))
+
+txt1 = Entry(base, font=ft)
+txt1.pack()
+
+txt2 = Entry(base, font=ft)
+txt2.pack()
+
+btn1 = Button(base, text="ADD", font=ft, command=eventmethod1)
+btn1.pack()
+
+btn2 = Button(base, text="SUBTR", font=ft, command=eventmethod2)
+btn2.pack()
+
+txt3 = Entry(base, font=ft)
+txt3.pack()
+
+base.mainloop()
+
+=============================================
+
+Example-6:
+-----------
+from tkinter import *
+
+base = Tk()
+base.geometry("300x300")
+base.title("First GUI Application")
+ft = ("Arial Bold", 13)
+
+def eventmethod1():
+    e = txt1.get()
+    n = txt2.get()
+    c = txt3.get()
+    fobj = open("new_stud_data", "a")
+    fobj.write(e + "," + n + "," + c + "\n")
+    fobj.close()
+    print("Data Saved...")
+
+def eventmethod2():
+    txt1.delete(0, END)
+    txt2.delete(0, END)
+    txt3.delete(0, END)
+    txt1.focus()
+
+txt1 = Entry(base, font=ft)
+txt1.pack()
+
+txt2 = Entry(base, font=ft)
+txt2.pack()
+
+txt3 = Entry(base, font=ft)
+txt3.pack()
+
+btn1 = Button(base, text="Save Data", font=ft, command=eventmethod1)
+btn1.pack()
+
+btn2 = Button(base, text="Reset", font=ft, command=eventmethod2)
+btn2.pack()
+
+base.mainloop()
+
+======================================
+
+Example-7
+-----------
+from tkinter import *
+
+base = Tk()
+base.geometry("300x300")
+base.title("First GUI Application")
+ft = ("Arial Bold", 13)
+
+def eventmethod1():
+    e = txt1.get()
+    n = txt2.get()
+    c = txt3.get()
+    fobj = open("new_stud_data", "a")
+    fobj.write(e + "," + n + "," + c + "\n")
+    fobj.close()
+    lb.configure(text="Data Saved...")
+
+
+def eventmethod2():
+    txt1.delete(0, END)
+    txt2.delete(0, END)
+    txt3.delete(0, END)
+    lb.configure(text="")
+    txt1.focus()
+
+txt1 = Entry(base, font=ft)
+txt1.pack()
+
+txt2 = Entry(base, font=ft)
+txt2.pack()
+
+txt3 = Entry(base, font=ft)
+txt3.pack()
+
+btn1 = Button(base, text="Save Data", font=ft, command=eventmethod1)
+btn1.pack()
+
+btn2 = Button(base, text="Reset", font=ft, command=eventmethod2)
+btn2.pack()
+
+lb = Label(base, font=ft, fg="red")
+lb.pack()
+
+base.mainloop()
+
+===============================================
+

@@ -1,0 +1,125 @@
+
+* We can also add checkbox and radiobuttons.
+
+* In case of radiobutton, we have to use two attributes:
+	variable=
+	value=
+
+* In case of checkbox, we have to use three attributes:
+	variable=
+	onvalue=
+	offvalue=
+
+* For value, we have to specify object of class 
+	StringVar
+	IntVar
+
+* If we declare and apply object of StringVar, then the 
+value must be of type String.
+* If we declare and apply object of IntVar, then the 
+value must be of type Int.
+
+=====================================
+
+* If we use object of StringVar() as variable, then all 
+radiobuttons will initially appear checked. 
+Then we have to make them unchecked by using deselect() 
+method.
+
+* If we use object of IntVar() a variable, then all
+radiobuttons will initially appear unchecked.
+
+For example:
+-------------
+from tkinter import *
+
+ft = ("Arial Bold", 12)
+base = Tk()
+base.configure(bg="cyan")
+base.geometry("500x500")
+base.title("Demonstrating First GUI")
+
+v1 = IntVar()
+v2 = IntVar()
+
+ch1 = Radiobutton(base, bg="cyan", text="Pizza", variable=v1, value=1, font=ft)
+ch1.pack()
+
+ch2 = Radiobutton(base, bg="cyan", text="Burger", variable=v1, value=2, font=ft)
+ch2.pack()
+
+ch3 = Radiobutton(base, text="Pastry",bg="cyan", variable=v1, value=3, font=ft)
+ch3.pack()
+
+ch4 = Radiobutton(base, text="Male", variable=v2, value=1)
+ch4.pack()
+
+ch5 = Radiobutton(base, text="Female", variable=v2, value=2)
+ch5.pack()
+
+base.mainloop()
+
+============================================
+============================================
+
+from tkinter import *
+
+def abcd():
+    print("Hello all")
+
+def pqr():
+    print("Hi all")
+
+def xyz():
+    print("Good Morning")
+
+ft = ("Arial Bold", 12)
+base = Tk()
+base.geometry("500x500")
+base.title("Demonstrating First GUI")
+
+btn1 = Button(base, text="RED", command=abcd, font=ft)
+btn1.pack()
+
+btn2 = Button(base, text="GREEN", command=pqr, font=ft)
+btn2.pack()
+
+btn3 = Button(base, text="YELLOW", command=xyz, font=ft)
+btn3.pack()
+
+
+base.mainloop()
+
+=============================================
+=============================================
+
+from tkinter import *
+
+def abcd():
+    base.configure(bg="red")
+
+def pqr():
+    base.configure(bg="green")
+
+def xyz():
+    base.configure(bg="yellow")
+
+ft = ("Arial Bold", 12)
+base = Tk()
+base.geometry("500x500")
+base.title("Demonstrating First GUI")
+
+btn1 = Button(base, text="RED", command=abcd, font=ft)
+btn1.pack()
+
+btn2 = Button(base, text="GREEN", command=pqr, font=ft)
+btn2.pack()
+
+btn3 = Button(base, text="YELLOW", command=xyz, font=ft)
+btn3.pack()
+
+base.mainloop()
+
+=============================================
+=============================================
+

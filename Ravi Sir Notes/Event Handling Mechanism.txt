@@ -1,0 +1,220 @@
+
+* We discussed and used attribute "command=".
+
+* This attribute is only to indicate basic mouse 
+click event on "Button" and "MenuItems"
+
+* This event is not applicable to every component 
+object. 
+
+=====================
+
+* Other than attribute "command=", we have one more 
+option to apply events on component object.
+
+* And it is by using bind() method.
+
+* To use bind() method, we require two parameters:
+	1. event type (event information)
+	2. event method
+
+For example:
+-------------
+
+from tkinter import *
+
+base = Tk()
+base.geometry("300x300")
+base.title("Demonstrating Event Handling")
+ft = ("Arial Bold", 13)
+
+def eventmethod1(e):  <--- parameter "e" is necessary
+    print("You clicked..")
+
+btn = Button(base, text="Click Here", font=ft)
+btn.bind("<Button-1>", eventmethod1)
+	# btn is register for mouse's left click.
+	# on method eventmethod1()
+btn.pack()
+
+base.mainloop()
+
+
+** important thing is, the parameter "e" is necessary 
+to declare as formal parameter of binded event method.
+
+* This "e" will receive a metadata object that contains 
+event information. This object might be helpful to 
+obtain some event related information.
+
+===========================
+
+Example-2:
+-----------
+
+from tkinter import *
+
+base = Tk()
+base.geometry("300x300")
+base.title("Demonstrating Event Handling")
+ft = ("Arial Bold", 13)
+
+def eventmethod1(e):
+    print("You clicked..")
+
+btn = Button(base, text="Click Here", font=ft)
+btn.bind("<Double-Button-1>", eventmethod1)
+	# "btn" is registered for double left clicks
+btn.pack()
+
+base.mainloop()
+
+=========================================
+
+* It is also possible to register one component object 
+for multiple events.
+
+Example-3:
+-----------
+
+from tkinter import *
+
+base = Tk()
+base.geometry("300x300")
+base.title("Demonstrating Event Handling")
+ft = ("Arial Bold", 13)
+
+def eventmethod1(e):
+    print("You clicked..")
+
+def eventmethod2(e):
+    btn.configure(bg="red", fg="yellow")
+
+def eventmethod3(e):
+    btn.configure(bg="silver", fg="black")
+
+btn = Button(base, text="Click Here", font=ft)
+btn.bind("<Button-1>", eventmethod1)
+btn.bind("<Enter>", eventmethod2)
+btn.bind("<Leave>", eventmethod3)
+btn.pack()
+
+base.mainloop()
+
+* In above example, "btn" is registered for 3 different 
+events. And there are 3 different event methods 
+performing related operations.
+
+Example-5:
+-----------
+from tkinter import *
+
+base = Tk()
+base.geometry("300x300")
+base.title("Demonstrating Event Handling")
+ft = ("Arial Bold", 13)
+
+def eventmethod1(e):
+    btn.configure(bg="red", fg="yellow")
+    a = int(txt1.get())
+    b = int(txt2.get())
+    c = a + b
+    txt3.delete(0, END)
+    txt3.insert(0, str(c))
+
+
+def eventmethod2(e):
+    txt1.delete(0, END)
+    txt2.delete(0, END)
+    txt3.delete(0, END)
+    btn.configure(bg="silver", fg="black")
+    txt1.focus()
+
+txt1 = Entry(base, font=ft)
+txt1.pack()
+
+txt2 = Entry(base, font=ft)
+txt2.pack()
+
+btn = Button(base, text="ADD", font=ft, bg="silver")
+btn.bind("<Enter>", eventmethod1)
+btn.bind("<Leave>", eventmethod2)
+btn.pack()
+
+txt3 = Entry(base, font=ft)
+txt3.pack()
+
+base.mainloop()
+
+====================================
+
+Example-6:
+-----------
+from tkinter import *
+
+base = Tk()
+base.geometry("300x300")
+base.title("Demonstrating Event Handling")
+ft = ("Arial Bold", 13)
+
+def eventmethod1(e):
+    btn.configure(bg="red", fg="yellow")
+    a = int(txt1.get())
+    b = int(txt2.get())
+    c = a + b
+    txt3.delete(0, END)
+    txt3.insert(0, str(c))
+
+
+def eventmethod2(e):
+    txt1.delete(0, END)
+    txt2.delete(0, END)
+    txt3.delete(0, END)
+    btn.configure(bg="silver", fg="black")
+    txt1.focus()
+
+def eventmethod3(e):
+    e.widget.configure(bg="red", fg="yellow")
+
+def eventmethod4(e):
+    e.widget.configure(bg="white", fg="black")
+
+txt1 = Entry(base, font=ft)
+txt1.bind("<FocusIn>", eventmethod3)
+txt1.bind("<FocusOut>", eventmethod4)
+txt1.focus()
+txt1.pack()
+
+txt2 = Entry(base, font=ft)
+txt2.bind("<FocusIn>", eventmethod3)
+txt2.bind("<FocusOut>", eventmethod4)
+txt2.pack()
+
+btn = Button(base, text="ADD", font=ft, bg="silver")
+btn.bind("<Enter>", eventmethod1)
+btn.bind("<Leave>", eventmethod2)
+btn.pack()
+
+txt3 = Entry(base, font=ft)
+txt3.pack()
+
+base.mainloop()
+
+* It is also possible to obtain any metadata about 
+occurred event.
+
+* In above examle, we have used "widget" attribute 
+to obtain the object of component object on which 
+event occurred.
+
+* It is similar to getSource() method in Java's event 
+handling.
+
+=========================================
+
+
+
+
+
+
+

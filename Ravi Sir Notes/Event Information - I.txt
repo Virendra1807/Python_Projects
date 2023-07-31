@@ -1,0 +1,237 @@
+
+* Other than "command=" attribute, we can also apply more 
+events on component objects (widget).
+
+* To do this, we have bind() method.
+* This bind() method has two parameters:
+	- event information
+	- event method
+
+* There are lots of events that are possible on different 
+component objects. Such as:
+	- mouse click/double click/triple click
+	- key press/release
+	- mouse cursor enter/leaves
+	- focus gained/lost
+
+For example:
+-------------
+from tkinter import *
+
+ft = ("Arial Bold", 12)
+base = Tk()
+base.geometry("500x500")
+base.title("Demonstrating First GUI")
+
+def eventmethod1(e):
+    print("Hello all")
+
+btn = Button(base, text="Click Here", font=ft)
+btn.bind("<Button-1>", eventmethod1)
+	# "btn" is registered for left click
+btn.pack()
+
+base.mainloop()
+
+
+Example-2:
+-----------
+from tkinter import *
+
+ft = ("Arial Bold", 12)
+base = Tk()
+base.geometry("500x500")
+base.title("Demonstrating First GUI")
+
+def eventmethod1(e):
+    print("Hello all")
+
+btn = Button(base, text="Click Here", font=ft)
+btn.bind("<Button-3>", eventmethod1)
+	# "btn" is binded for right-click
+btn.pack()
+
+base.mainloop()
+
+================================
+
+Example-3:
+-----------
+btn = Button(base, text="Click Here", font=ft)
+btn.bind("<Double-Button-1>", eventmethod1)
+	'btn' is registered for double-left-clicks
+btn.pack()
+
+==============================================
+
+Example-4:
+-----------
+btn = Button(base, text="Click Here", font=ft)
+btn.bind("<Double-Button-3>", eventmethod1)
+	# 'btn' is registed for double-right-clicks
+btn.pack()
+
+===============================================
+===============================================
+
+* We can even bind any widget for multile events also.
+
+For example:
+-------------
+btn = Button(base, text="Click Here", font=ft)
+btn.bind("<Button-3>", eventmethod1)
+btn.bind("<Button-1>", eventmethod2)
+btn.pack()
+
+
+* Above 'btn' is binded for left-click and right-click
+
+Example-2:
+-----------
+from tkinter import *
+
+ft = ("Arial Bold", 12)
+base = Tk()
+base.geometry("500x500")
+base.title("Demonstrating First GUI")
+
+def eventmethod1(e):
+    print("Right Click")
+
+def eventmethod2(e):
+    print("Left Click")
+
+def eventmethod3(e):
+    btn.configure(bg="red", fg="yellow")
+
+def eventmethod4(e):
+    btn.configure(bg="silver", fg="black")
+
+btn = Button(base, text="Click Here", font=ft)
+btn.bind("<Button-3>", eventmethod1)
+btn.bind("<Button-1>", eventmethod2)
+btn.bind("<Enter>", eventmethod3)
+btn.bind("<Leave>", eventmethod4)
+btn.pack()
+
+base.mainloop()
+
+* Above 'btn' is binded for right-click, left-click, 
+mouse enter and mouse exit events.
+
+================================================
+
+Example-6:
+-----------
+from tkinter import *
+
+ft = ("Arial Bold", 12)
+base = Tk()
+base.geometry("500x500")
+base.title("Demonstrating First GUI")
+
+def eventmethod3(e):
+    btn.configure(bg="red", fg="yellow")
+    a = int(txt1.get())
+    b = int(txt2.get())
+    c = a + b
+    txt3.delete(0, END)
+    txt3.insert(0, str(c))
+
+def eventmethod4(e):
+    txt1.delete(0, END)
+    txt2.delete(0, END)
+    txt3.delete(0, END)
+    txt1.focus()
+    btn.configure(bg="silver", fg="black")
+
+txt1 = Entry(base, font=ft)
+txt1.pack()
+
+txt2 = Entry(base, font=ft)
+txt2.pack()
+
+btn = Button(base, text="ADD", font=ft, bg="silver")
+btn.bind("<Enter>", eventmethod3)
+btn.bind("<Leave>", eventmethod4)
+btn.pack()
+
+txt3 = Entry(base, font=ft)
+txt3.pack()
+
+base.mainloop()
+
+============================================
+
+* We have the most used attribute "widget". This attribute 
+is availabe in event's metadata object.
+* This attribute will return the component object (widget) 
+on which event occurred.
+
+For example:
+-------------
+from tkinter import *
+
+ft = ("Arial Bold", 12)
+base = Tk()
+base.geometry("500x500")
+base.title("Demonstrating First GUI")
+
+def eventmethod3(e):
+    a = e.widget.cget("text")
+    print("You selected", a)
+
+
+btn1 = Button(base, text="ADD", font=ft, bg="silver")
+btn1.bind("<Button-1>", eventmethod3)
+btn1.pack()
+
+btn2 = Button(base, text="SUBTR", font=ft, bg="silver")
+btn2.bind("<Button-1>", eventmethod3)
+btn2.pack()
+
+base.mainloop()
+
+*** Here "e.widget" will obtain the component object (widget) 
+on which event occurred.
+*** The cget() method is configuration-getter method. This 
+method will obtain the value of specified attribute of 
+invoking component object (widget).
+
+For example:
+-------------
+
+a = btn.cget("bg")
+This will obtain and return value of "bg" attribute 
+of "btn"
+
+
+b = ch1.cget("text")
+This will obtain and return value of "text" attribute of 
+checkbox ch1.
+
+======================================
+
+Example-7:
+-----------
+from tkinter import *
+
+def eventmethod3(e):
+    a = e.x
+    b = e.y
+    lb.configure(text=str(a) + "x" + str(b))
+
+ft = ("Arial Bold", 12)
+base = Tk()
+base.geometry("500x500")
+base.title("Demonstrating First GUI")
+base.bind("<Motion>", eventmethod3)
+
+
+lb = Label(base, font=ft)
+lb.pack()
+
+base.mainloop()
+
+================================================
+

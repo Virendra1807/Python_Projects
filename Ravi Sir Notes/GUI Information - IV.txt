@@ -1,0 +1,150 @@
+
+* Any variable - IntVar() and StringVar() mainly have two 
+methods:
+	get()
+	set()
+
+* If we want to set any default value for variable, then 
+set it by using set()
+
+For example:
+-------------
+
+v1 = IntVar()
+v1.set(2)   <--- setting value "2" as selected radiobutton
+
+rb1 = Radiobutton(base, text="BreakFast", font=ft)
+rb1.configure(variable=v1, value=1)
+rb1.pack()
+
+rb2 = Radiobutton(base, text="Lumch", font=ft)
+rb2.configure(variable=v1, value=2)
+rb2.pack()
+
+rb3 = Radiobutton(base, text="Dinner", font=ft)
+rb3.configure(variable=v1, value=3)
+rb3.pack()
+
+===========================================
+
+* If we want to obtain value of variable, then use 
+get() method.
+
+from tkinter import *
+
+ft = ("Arial Bold", 12)
+base = Tk()
+base.geometry("500x500")
+base.title("Demonstrating First GUI")
+
+def eventmethod1():
+    a = v1.get()  <--- will fetch value applied in "v1"
+    if a==1: print("You selected BreakFast")
+    elif a==2: print("You selected Lunch")
+    elif a==3: print("You selected Dinner")
+
+v1 = IntVar()
+
+rb1 = Radiobutton(base, text="BreakFast", font=ft)
+rb1.configure(variable=v1, value=1)
+rb1.pack()
+rb1.select()
+
+rb2 = Radiobutton(base, text="Lunch", font=ft)
+rb2.configure(variable=v1, value=2)
+rb2.pack()
+
+rb3 = Radiobutton(base, text="Dinner", font=ft)
+rb3.configure(variable=v1, value=3)
+rb3.pack()
+
+btn1 = Button(base, text="CHECK", command=eventmethod1)
+btn1.pack()
+
+base.mainloop()
+
+============================================
+
+* In case of Radiobutton, we need one variable among one 
+group. And every Radiobutton must have different value.
+Whichever Radiobutton is selected, it's value will be 
+applied to variable.
+
+* In case of Checkbox, we need one variable per checkbox.
+And also need additional two attributes:
+	onvalue=
+	offvalue=
+
+from tkinter import *
+
+ft = ("Arial Bold", 12)
+base = Tk()
+base.geometry("500x500")
+base.title("Demonstrating First GUI")
+
+def eventmethod1():
+    a = v1.get()
+    b = v2.get()
+    c = v3.get()
+    print(a,b,c, sep="\t")
+
+v1 = IntVar()
+v1.set(2) <--- prefer to set offvalue as default value of variable
+v2 = IntVar()
+v2.set(2) <--- prefer to set offvalue as default for variable
+v3 = IntVar()
+v3.set(2) <--- prefer to set offvalue as default for variable
+
+ch1 = Checkbutton(base, text="Pizza", font=ft)
+ch1.configure(variable=v1, onvalue=1, offvalue=2)
+ch1.pack()
+
+ch2 = Checkbutton(base, text="Burger", font=ft)
+ch2.configure(variable=v2, onvalue=1, offvalue=2)
+ch2.pack()
+
+ch3 = Checkbutton(base, text="Pastry", font=ft)
+ch3.configure(variable=v3, onvalue=1, offvalue=2)
+ch3.pack()
+
+btn1 = Button(base, text="CHECK", command=eventmethod1)
+btn1.pack()
+
+base.mainloop()
+
+=================================================
+=================================================
+
+* It is also possible to switch between multiple windows.
+* Work with destroy() method and mainloop() method.
+
+
+from tkinter import *
+
+ft = ("Arial Bold", 12)
+base = Tk()
+base.geometry("500x500")
+base.title("Demonstrating First GUI")
+
+def abc():
+    base.destroy()
+
+def xyz():
+    base2 = Tk()
+    base2.geometry("200x200")
+    base2.title("Second Window")
+    lb = Label(base2, text="This is new window", font=ft)
+    lb.pack()
+    btn = Button(base2, text="XYZ", font=ft)
+    btn.pack()
+    base.destroy()
+    base2.mainloop()
+
+btn1 = Button(base, text="CLOSE", font=ft, command=abc)
+btn1.pack()
+
+btn2 = Button(base, text="NEW", font=ft, command=xyz)
+btn2.pack()
+
+base.mainloop()
+

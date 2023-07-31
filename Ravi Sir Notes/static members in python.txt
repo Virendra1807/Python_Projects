@@ -1,0 +1,40 @@
+
+* To declare static member function:
+	@staticmethod
+
+* To declare static data member:
+	declare it with classname and dot(.)
+
+==============================================
+
+class Test:
+    def accept_info(self):
+        print("Enter 3 values")
+        self.x = input()  <--- is non static data member
+        self.y = input()  <--- is non static data member
+        Test.z = input()  <--- is static data member
+
+    def show_info(self):
+        print(self.x)
+        print(self.y)
+        print(Test.z)
+
+    @saticmethod
+    def abcd():    <--- is static member function
+	print(Test.z)
+
+
+t1 = Test()
+t2 = Test()
+
+print("For first object")
+t1.accept_info()
+print("For second object")
+t2.accept_info()
+
+print("Showing first object")
+t1.show_info()
+print("Showing second object")
+t2.show_info()
+
+

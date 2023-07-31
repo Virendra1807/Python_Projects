@@ -1,0 +1,172 @@
+
+* We can also add checkbox and radiobutton in GUI.
+
+* For this, we have class Checkbutton and Radiobutton
+
+Example-1:
+-----------
+from tkinter import *
+
+base = Tk()
+base.geometry("300x300")
+base.title("First GUI Application")
+ft = ("Arial Bold", 13)
+
+ch1 = Checkbutton(base, text="Pizza", font=ft)
+ch1.pack()
+
+ch2 = Checkbutton(base, text="Burger", font=ft)
+ch2.pack()
+
+ch3 = Checkbutton(base, text="Pastry", font=ft)
+ch3.pack()
+
+base.mainloop()
+
+============================================
+
+* In case of checkbox, we have 3 additional attributes:
+	variable=
+	onvalue=
+	offvalue=
+
+* In case of radiobutton, we have 2 additional attirubtes:
+	variable=
+	value=
+
+================================================
+
+* These checkboxes and radiobuttons, requires variable 
+name. This variable must be object of class 
+	- StringVar()
+	- IntVar()
+
+For example:
+-------------
+
+v1 = StringVar()
+v2 = IntVar()
+
+==================================================
+
+* Each checkbox, requies individual variable with 
+onvalue and offvalue attributes.
+
+* In radiobuttons, a group of radiobuttons must use 
+same variable name. This indicates they are in one group.
+So that only one radiobutton can be checked among that 
+group.
+
+===================================================
+
+For Example-2:
+---------------
+from tkinter import *
+
+base = Tk()
+base.geometry("300x300")
+base.title("First GUI Application")
+ft = ("Arial Bold", 13)
+
+v1 = IntVar()
+v2 = IntVar()
+
+rb1 = Radiobutton(base, text="BreakFast", font=ft, variable=v1, value=1)
+rb1.pack()
+
+rb2 = Radiobutton(base, text="Lunch", font=ft, variable=v1, value=2)
+rb2.pack()
+
+rb3 = Radiobutton(base, text="Dinner", font=ft, variable=v1, value=3)
+rb3.pack()
+
+rb4 = Radiobutton(base, text="Male", font=ft, variable=v2, value=1)
+rb4.pack()
+
+rb5 = Radiobutton(base, text="Female", font=ft, variable=v2, value=2)
+rb5.pack()
+
+base.mainloop()
+
+============================================
+
+* Use select() and deselect() methods to check-uncheck 
+radiobuttons and checkboxes, manually.
+
+For example:
+-------------
+rb1.select()
+rb3.deselect()
+rb4.select()
+
+===================================================
+
+* All above previous examples, are only and only to 
+demonstrate tkinter classes and their basic attributes.
+
+* All above programs are non-working models. Because 
+there are no events.
+
+Event is an action performed on component object.
+
+====================================================
+
+* For basic click operations, we have attribute 
+	command=
+
+* Simply assign a function as reference to this attribute
+and hence, this function will respond whenever that 
+button is clicked.
+
+For example:
+-------------
+from tkinter import *
+
+base = Tk()
+base.geometry("300x300")
+base.title("First GUI Application")
+ft = ("Arial Bold", 13)
+
+def abcd():
+    print("Hello all")
+
+btn1 = Button(base, text="Submit", font=ft, command=abcd)
+			# function abcd() is binded with 
+			btn1 for click operations.
+btn1.pack()
+
+base.mainloop()
+
+==================================================
+
+Example-5:
+-----------
+from tkinter import *
+
+base = Tk()
+base.geometry("300x300")
+base.title("First GUI Application")
+ft = ("Arial Bold", 13)
+
+def abc():
+    base.configure(bg="red")
+
+def pqr():
+    base.configure(bg="green")
+
+def xyz():
+    base.configure(bg="yellow")
+
+btn1 = Button(base, text="RED", font=ft, command=abc)
+btn1.pack()
+
+btn2 = Button(base, text="GREEN", font=ft, command=pqr)
+btn2.pack()
+
+btn3 = Button(base, text="YELLOW", font=ft, command=xyz)
+btn3.pack()
+
+base.mainloop()
+
+===================================================
+

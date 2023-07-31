@@ -1,0 +1,276 @@
+
+Example-2:
+-----------
+import sqlite3
+from tkinter import *
+
+base = Tk()
+base.geometry("300x300")
+base.title("Demonstrating Database Operations")
+ft = ("Arial Black", 13)
+
+def eventmethod1(e):
+    nm = txt1.get()
+    post = txt2.get()
+    dep = txt3.get()
+    sal = txt4.get()
+    query = "insert into emp_info values ('" + nm + "', '" + post + "', '" + dep + "', '" + sal + "')"
+    con = sqlite3.connect("student_db.db")
+    con.execute(query)
+    con.commit()
+    con.close()
+    print("Data Saved...")
+
+txt1 = Entry(base, font=ft)
+txt1.pack()
+
+txt2 = Entry(base, font=ft)
+txt2.pack()
+
+txt3 = Entry(base, font=ft)
+txt3.pack()
+
+txt4 = Entry(base, font=ft)
+txt4.pack()
+
+btn = Button(base, text="Save Data", font=ft)
+btn.bind("<Button-1>", eventmethod1)
+btn.pack()
+
+base.mainloop()
+
+=================================================
+
+import sqlite3
+from tkinter import *
+from tkinter import messagebox as ms
+
+base = Tk()
+base.geometry("300x300")
+base.title("Demonstrating Database Operations")
+ft = ("Arial Black", 13)
+
+def eventmethod1(e):
+    nm = txt1.get()
+    post = txt2.get()
+    dep = txt3.get()
+    sal = txt4.get()
+    query = "insert into emp_info values ('" + nm + "', '" + post + "', '" + dep + "', '" + sal + "')"
+    con = sqlite3.connect("student_db.db")
+    con.execute(query)
+    con.commit()
+    con.close()
+    ms.showinfo("Success", "Data Saved Successfully")
+
+
+txt1 = Entry(base, font=ft)
+txt1.pack()
+
+txt2 = Entry(base, font=ft)
+txt2.pack()
+
+txt3 = Entry(base, font=ft)
+txt3.pack()
+
+txt4 = Entry(base, font=ft)
+txt4.pack()
+
+btn = Button(base, text="Save Data", font=ft)
+btn.bind("<Button-1>", eventmethod1)
+btn.pack()
+
+base.mainloop()
+
+======================================================
+
+Example-3:
+-----------
+import sqlite3
+from tkinter import *
+from tkinter import messagebox as ms
+
+base = Tk()
+base.geometry("300x300")
+base.title("Demonstrating Database Operations")
+ft = ("Arial Black", 13)
+
+def eventmethod1(e):
+    a = ms.askyesno("Are you Sure?", "You sure, you want to Exit?")
+    if a==True:
+        base.destroy()
+
+btn = Button(base, text="Exit", font=ft)
+btn.bind("<Button-1>", eventmethod1)
+btn.pack()
+
+base.mainloop()
+
+====================================================
+
+* All IUD queries work similar to above example. 
+* We need to follow same 3 steps everytime.
+
+* But in case of "SELECT" query, we need to use class 
+cursor.
+* This class is like class java.sql.ResultSet. 
+* Additionally, we have to aquire an instance of class 
+cursor by using cursor() method. 
+
+For example:
+-------------
+
+con = sqlite3.connect("student_db.db")
+cur = con.cursor()   <--- obtained cursor instnace 
+
+* Now execute SELECT query by using cursor's execute() 
+method. 
+
+cur.execute("select * from emp_info")
+
+* To obtain data from dataset, we have 3 methods of class 
+cursor:
+	- fetchone()
+	- fetchmany()
+	- fetchall()
+
+1) fetchone() method reads first record and drop read 
+cursor to second record.
+OR
+fetchone() method reads the record where cursor is 
+currently pointing and then drops read cursor to next 
+available record. (similar to file handling's readline() )
+
+2) fetchmany() method requires parameter that specifies 
+numbers of records to fetch. 
+
+3) fetchall() method fetches all records from resultset.
+
+
+Example-4:
+-----------
+import sqlite3
+
+query = "select * from emp_info"
+
+con = sqlite3.connect("student_db.db")
+cur = con.cursor()
+cur.execute(query)
+data = cur.fetchone()  <--- will fetch first record 
+			and drops cursor to second record
+print(data)
+
+
+data2 = cur.fetchone()  <--- will fetch second record
+			and drops cursor to third record
+print(data2)
+
+con.close()
+
+==================================
+
+Example-5:
+-----------
+import sqlite3
+
+query = "select * from emp_info"
+
+con = sqlite3.connect("student_db.db")
+cur = con.cursor()
+cur.execute(query)
+
+data = cur.fetchmany(2)  <--- will fetch first two records 
+				from dataset.
+print(data)
+
+con.close()
+
+======================================
+
+Example-6:
+-----------
+import sqlite3
+
+query = "select * from emp_info"
+
+con = sqlite3.connect("student_db.db")
+cur = con.cursor()
+cur.execute(query)
+
+data = cur.fetchall()  <--- will fetch all records from 
+				dataset.
+print(data)
+
+con.close()
+
+=============================================
+
+Example-7:
+-----------
+import sqlite3
+
+query = "select * from emp_info where edept='Sales'"
+
+con = sqlite3.connect("student_db.db")
+cur = con.cursor()
+cur.execute(query)
+
+data = cur.fetchall()
+print(data)
+
+con.close()
+
+=============================================
+
+Example-8:
+-----------
+import sqlite3
+from tkinter import *
+
+base = Tk()
+base.geometry("300x300")
+base.title("Demonstrating Database Events")
+ft = ("Arial Bold", 13)
+
+def eventmethod1(e):
+    a = txt1.get()
+    query = "select epost, edept, esal from emp_info where ename='" + a + "'"
+
+    con = sqlite3.connect("student_db.db")
+    cur = con.cursor()
+    cur.execute(query)
+    data = cur.fetchone()
+    txt2.delete(0, END)
+    txt3.delete(0, END)
+    txt4.delete(0, END)
+    txt2.insert(0, data[0])
+    txt3.insert(0, data[1])
+    txt4.insert(0, data[2])
+
+txt1 = Entry(base, font=ft)
+txt1.pack()
+
+txt2 = Entry(base, font=ft)
+txt2.pack()
+
+txt3 = Entry(base, font=ft)
+txt3.pack()
+
+txt4 = Entry(base, font=ft)
+txt4.pack()
+
+btn = Button(base, text="Fetch", font=ft)
+btn.bind("<Button-1>", eventmethod1)
+btn.pack()
+
+base.mainloop()
+
+
+
+
+
+
+
+
+
+
+
